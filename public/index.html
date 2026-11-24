@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Сотрудники · Кадровый учёт</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<header><div class="wrap brand"><span class="mark" aria-hidden="true">К</span>Кадровый учёт</div></header>
+<main class="wrap">
+  <div class="title"><h1>Сотрудники</h1><button class="primary" id="add">＋ Добавить сотрудника</button></div>
+  <section class="summary" aria-label="Сводка по организации">
+    <div>Всего сотрудников<strong id="total">—</strong></div>
+    <div>Работают<strong id="active">—</strong></div>
+    <div>Уволены<strong id="former">—</strong></div>
+  </section>
+  <section class="panel" aria-label="Реестр сотрудников">
+    <div class="filters">
+      <label>Поиск по ФИО<input id="search" type="search" placeholder="Фамилия, имя или отчество"></label>
+      <label>Отдел<select id="dept"></select></label>
+      <label>Должность<select id="job"></select></label>
+      <button id="reset">Сбросить</button>
+    </div>
+    <div class="scroll"><table>
+      <thead><tr><th>Сотрудник</th><th>Отдел</th><th>Должность</th><th>Зарплата</th><th>Дата приёма</th><th>Статус</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+    <p id="count" role="status"></p>
+  </section>
+  <p id="notice" role="status"></p>
+</main>
+<dialog id="card" aria-labelledby="heading">
+  <div class="dialog-head"><h2 id="heading"></h2><button type="button" class="close" aria-label="Закрыть">×</button></div>
+  <form id="employee">
+    <fieldset><legend>Личные данные</legend><div class="grid">
+      <label class="wide">ФИО<input name="name" required maxlength="160" autocomplete="off"></label>
+      <label>Дата рождения<input name="birth" type="date" required></label>
+      <label>Серия и номер паспорта<input name="passport" inputmode="numeric" placeholder="0000 000000" required></label>
+      <label>Телефон<input name="phone" type="tel" placeholder="+7 (000) 000-00-00" required></label>
+      <label>Адрес проживания<input name="address" required maxlength="300"></label>
+    </div></fieldset>
+    <fieldset><legend>Работа</legend><div class="grid">
+      <label>Отдел<input name="department" list="departments" required maxlength="100"></label>
+      <label>Должность<input name="position" list="positions" required maxlength="100"></label>
+      <label>Зарплата, ₽<input name="salary" type="number" min="0" max="9999999999.99" step="0.01" required></label>
+      <label>Дата приёма<input name="hired" type="date" required></label>
+    </div></fieldset>
+    <datalist id="departments"></datalist><datalist id="positions"></datalist>
+    <p id="card-status"></p><p class="error" id="error" role="alert"></p>
+    <div class="actions"><button type="button" id="dismiss" class="danger">Уволить</button><button type="button" class="close">Закрыть</button><button class="primary" id="save">Сохранить</button></div>
+  </form>
+</dialog>
+<dialog id="confirm" aria-labelledby="confirm-title"><h2 id="confirm-title">Уволить сотрудника?</h2><p id="question"></p><div class="actions"><button id="cancel">Отмена</button><button class="danger" id="yes">Уволить</button></div></dialog>
+</body>
+</html>
